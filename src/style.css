@@ -1,0 +1,278 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+:root {
+    --primary-color: #6fb9f5;
+    --primary-color-dark: #3b7ae0;
+    --secondary-color: #fca209;
+    --background-color: #f0f4f8;
+    --text-color: #333;
+    --text-color-light: #666666;
+    --card-background: #ffffff;
+    --border-radius: 8px;
+    --border-rounded: 500px;
+    --wind-color: #888888;
+    --water-color: #3498db;
+
+    /* cloudy background */
+    --background-cloudy: 
+        radial-gradient(circle at 15% 0%,rgb(160, 200, 255) 10%, transparent 10%),
+        radial-gradient(circle at 0% 5%,rgb(160, 200, 255) 10%, transparent 10%),
+        radial-gradient(circle at 100% 20%,rgb(160, 200, 255) 10%, transparent 10%),
+        radial-gradient(circle at 100% 30%,rgb(160, 200, 255) 10%, transparent 10%),
+        radial-gradient(circle at 0% 40%,rgb(160, 200, 255) 10%, transparent 10%),
+        radial-gradient(circle at -2% 45%,rgb(160, 200, 255) 10%, transparent 10%),
+        radial-gradient(circle at 100% 70%,rgb(160, 200, 255) 10%, transparent 10%),
+        radial-gradient(circle at 102% 75%,rgb(160, 200, 255) 10%, transparent 10%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Bahnschrift', sans-serif;
+}
+
+html {
+    font-size: clamp(8px, calc(8px + 1vw), 16px);
+    background-color: var(--background-color);
+    background-image: var(--background-cloudy);
+}
+
+body {
+    min-height: 100dvh;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    color: var(--text-color);
+}
+
+main {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 4rem;
+    padding: min(8%, 2rem);
+}
+
+/* search box css starts here */
+.search-box {
+    font-size: 2rem;
+    background-color: var(--card-background);
+    border-radius: var(--border-rounded);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1rem;
+}
+
+.search-box i {
+    padding: 0rem 1.5rem;
+    color: var(--secondary-color);
+}
+
+.search-box input {
+    font-size: 0.75em;
+    font-weight: 400;
+    padding: 1.25rem 0rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+.search-box .search-btn {
+    background-color: var(--primary-color);
+    padding: 0 1.5rem;
+    border: none;
+    border-radius: var(--border-rounded);
+    height: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-box .search-btn:hover {
+    background-color: var(--primary-color-dark);
+}
+
+.search-box .search-btn i {
+    font-size: 1.75rem;
+    color: var(--text-color);
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+/* weather info css starts here */
+.weather-box {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 2rem;
+    width: 100%;
+    max-width: 900px;
+}
+
+.weather {
+    color: var(--text-color);
+    background-color: transparent;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.weather .condition-box {
+    width: auto;
+    height: min(40vw, 150px);
+    aspect-ratio: 1/1;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
+}
+
+.weather .condition-box img {
+    width: auto;
+    height: 100%;
+    object-fit: contain;
+}
+
+.condition {
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-top: 1rem;
+}
+
+.temp {
+    font-size: 6rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.temp sup {
+    font-size: 4rem;
+}
+
+.extra-box {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+
+    color: var(--text-color);
+    font-size: 2rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+}
+
+.extra-box div .title {
+    font-size: 1.25rem;
+}
+
+.extra-box div .fa-droplet {
+    color: var(--water-color);
+}
+
+.extra-box div .fa-wind {
+    color: var(--wind-color);
+}
+
+/* Hourly forecast section css starts here */
+.hourly-forecast-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    max-width: 100%;
+}
+
+.card {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.card .condition-box {
+    width: auto;
+    height: 80px;
+    aspect-ratio: 1/1;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+.card .condition-box img {
+    width: auto;
+    height: 100%;
+    object-fit: contain;
+}
+
+.card .temp {
+    font-size: 2rem;
+}
+
+.card .time {
+    font-size: 2rem;
+    color: var(--text-color-light);
+}
+
+/* Loader CSS starts here  */
+.loader {
+    justify-self: center;
+    align-self: center;
+    width: min(20vw, 150px);
+    display: none;
+    aspect-ratio: 1/1;
+}
+.loader img {
+    width: auto;
+    height: 100%;
+    object-fit: contain;
+    animation: scaling 2s linear infinite, blink 2s linear infinite;
+}
+@keyframes scaling{
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+@keyframes blink {
+    0%, 100% {
+        filter: drop-shadow(0px 0px 2px #fec51c);
+    }
+    50% {
+        filter: drop-shadow(0px 0px 10px #fec51c);
+    }
+}
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@view-transition {
+    transition-duration: 500ms; /* Sets the default for all transitions */
+}
+
+
+@media (min-width: 800px) {
+    main {
+        justify-content: center;
+    }
+    .search-box{
+        font-size: 1.5rem;
+    }
+    .hourly-forecast-box {
+        grid-template-columns: repeat(4, 170px);
+        place-content: center;
+    }
+}

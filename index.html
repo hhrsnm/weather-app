@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="shortcut icon" href="/weather-app.png" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather App</title>
+  <script src="https://kit.fontawesome.com/b3f1cc3163.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <main>
+    <section class="search-box">
+      <i class="fa-solid fa-location-dot"></i>
+      <input type="text" id="city-input" placeholder="Enter a city">
+      <button class="search-btn">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </section>
+    <section class="loader">
+      <img src="src/assets/clear.png" alt="Loading icon">
+    </section>
+    <section class="weather-box">
+      <div class="weather">
+        <h1>Current Weather</h1>
+        <div class="condition-box">
+          <img src="src/assets/clear.png" alt="Condition icon">
+        </div>
+        <h2 class="condition">Clear</h2>
+        <div class="temp"><span>20</span><sup>&deg;C</sup></div>
+        <div class="extra-box">
+          <div class="humidity">
+            <div class="value">
+              <i class="fa-solid fa-droplet"></i>
+              <span>20</span><sup> %</sup>
+            </div>
+            <div class="title">Humidity</div>
+          </div>
+          <div class="wind-speed">
+            <div class="value">
+              <i class="fa-solid fa-wind"></i>
+              <span>10</span><sup> km/h</sup>
+            </div>
+            <div class="title">Wind Speed</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hourly-forecast-box">
+        <div class="card">
+          <div class="temp"><span>20</span>&deg;C</div>
+          <div class="condition-box">
+            <img src="src/assets/clear.png" alt="Condition icon">
+          </div>
+          <div class="time">12:00</div>
+        </div>
+
+        <div class="card">
+          <div class="temp"><span>20</span>&deg;C</div>
+          <div class="condition-box">
+            <img src="src/assets/clear.png" alt="Condition icon">
+          </div>
+          <div class="time">12:00</div>
+        </div>
+
+        <div class="card">
+          <div class="temp"><span>20</span>&deg;C</div>
+          <div class="condition-box">
+            <img src="src/assets/clear.png" alt="Condition icon">
+          </div>
+          <div class="time">12:00</div>
+        </div>
+
+        <div class="card">
+          <div class="temp"><span>20</span>&deg;C</div>
+          <div class="condition-box">
+            <img src="src/assets/clear.png" alt="Condition icon">
+          </div>
+          <div class="time">12:00</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
