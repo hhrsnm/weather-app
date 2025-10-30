@@ -96,9 +96,10 @@ function displayCurrentWeather(data, locationName) {
     const humidityBox = document.querySelector('.weather-box .weather .extra-box .humidity span');
     const windSpeedBox = document.querySelector('.weather-box .weather .extra-box .wind-speed span');
 
+    const imgPath = `/assets/${weatherCondition(data.weatherCondition.type).toLowerCase()}.png`;
     //Update DOM elements with data
     locationBox.textContent = `${locationName}`;
-    conditionIconBox.src = `/assets/${weatherCondition(data.weatherCondition.type).toLowerCase()}.png`;
+    conditionIconBox.src = new URL(imgPath, import.meta.url).href;
     conditionTextBox.textContent = `${weatherCondition(data.weatherCondition.type)}`;
     temperatureBox.textContent = `${data.temperature.degrees}`;
     humidityBox.textContent = `${data.relativeHumidity}`;
@@ -117,9 +118,11 @@ function displayHourlyForecast(data) {
         //Get hourly forecast data
         const forecastData = data.forecastHours[index + 1];
 
+        const imgPath = `/assets/${weatherCondition(forecastData.weatherCondition.type).toLowerCase()}.png`;
+
         //Update DOM elements with data
         tempBox.textContent = forecastData.temperature.degrees;
-        conditionIconBox.src = `/assets/${weatherCondition(forecastData.weatherCondition.type).toLowerCase()}.png`;
+        conditionIconBox.src = new URL(imgPath, import.meta.url).href;
         timeBox.textContent = formatToLocalTime(forecastData.interval.startTime, data.timeZone.id);
     });
 }
@@ -152,7 +155,7 @@ function hideLoader() {
 document.addEventListener('DOMContentLoaded', async () => {
     //Fetch default city's weather data on load
     try {
-        await fetchAndDisplayWeather('New York');
+        await fetchAndDisplayWeather('London');
     } catch (error) {
         console.warn(error);
     }
