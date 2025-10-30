@@ -98,7 +98,7 @@ function displayCurrentWeather(data, locationName) {
 
     //Update DOM elements with data
     locationBox.textContent = `${locationName}`;
-    conditionIconBox.src = `src/assets/${weatherCondition(data.weatherCondition.type).toLowerCase()}.png`;
+    conditionIconBox.src = `/assets/${weatherCondition(data.weatherCondition.type).toLowerCase()}.png`;
     conditionTextBox.textContent = `${weatherCondition(data.weatherCondition.type)}`;
     temperatureBox.textContent = `${data.temperature.degrees}`;
     humidityBox.textContent = `${data.relativeHumidity}`;
@@ -119,7 +119,7 @@ function displayHourlyForecast(data) {
 
         //Update DOM elements with data
         tempBox.textContent = forecastData.temperature.degrees;
-        conditionIconBox.src = `src/assets/${weatherCondition(forecastData.weatherCondition.type).toLowerCase()}.png`;
+        conditionIconBox.src = `/assets/${weatherCondition(forecastData.weatherCondition.type).toLowerCase()}.png`;
         timeBox.textContent = formatToLocalTime(forecastData.interval.startTime, data.timeZone.id);
     });
 }
