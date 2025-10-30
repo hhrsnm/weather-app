@@ -11,6 +11,7 @@
 
 <body>
   <main>
+    <!-- Search Box -->
     <section class="search-box">
       <i class="fa-solid fa-location-dot"></i>
       <input type="text" id="city-input" placeholder="Enter a city">
@@ -18,12 +19,16 @@
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
     </section>
+
     <section class="loader">
-      <img src="src/assets/clear.png" alt="Loading icon">
+      <div class="sun"></div>
     </section>
+
+    <!-- Weather Content -->
     <section class="weather-box">
+      <!-- Current Weather -->
+      <h1 class="location">London, UK</h1>
       <div class="weather">
-        <h1>Current Weather</h1>
         <div class="condition-box">
           <img src="src/assets/clear.png" alt="Condition icon">
         </div>
@@ -47,6 +52,7 @@
         </div>
       </div>
 
+      <!-- Hourly Forecast -->
       <div class="hourly-forecast-box">
         <div class="card">
           <div class="temp"><span>20</span>&deg;C</div>

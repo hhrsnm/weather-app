@@ -17,7 +17,8 @@ async function fetchCityCoordinates(city) {
 
         //extract lat and lng
         const { lat, lng } = data.results[0].geometry.location;
-        return { lat, lng };
+        const locationName = data.results[0].formatted_address;
+        return { lat, lng, locationName };
     } catch (error) {
         alert(error);
         throw error;
@@ -37,7 +38,7 @@ async function fetchCurrentWeather(lat, lng) {
     } catch (error) {
         alert(error);
         throw error;
-    } 2
+    }
 }
 
 //Use to fetch hourly forecast data
@@ -86,8 +87,9 @@ function formatToLocalTime(time, timezone) {
     });
 }
 //Use to display current weather data
-function displayCurrentWeather(data) {
+function displayCurrentWeather(data, locationName) {
     //Select DOM elements
+    const locationBox = document.querySelector('.weather-box .location');
     const conditionIconBox = document.querySelector('.weather-box .weather .condition-box img');
     const conditionTextBox = document.querySelector('.weather-box .weather h2.condition');
     const temperatureBox = document.querySelector('.weather-box .weather .temp span');
@@ -95,6 +97,7 @@ function displayCurrentWeather(data) {
     const windSpeedBox = document.querySelector('.weather-box .weather .extra-box .wind-speed span');
 
     //Update DOM elements with data
+    locationBox.textContent = `${locationName}`;
     conditionIconBox.src = `src/assets/${weatherCondition(data.weatherCondition.type).toLowerCase()}.png`;
     conditionTextBox.textContent = `${weatherCondition(data.weatherCondition.type)}`;
     temperatureBox.textContent = `${data.temperature.degrees}`;
@@ -120,48 +123,59 @@ function displayHourlyForecast(data) {
         timeBox.textContent = formatToLocalTime(forecastData.interval.startTime, data.timeZone.id);
     });
 }
-document.addEventListener('DOMContentLoaded', () => {
-    navigator.geolocation.getCurrentPosition(async (position) => {
-        const lat = position.coords.latitude;
-        const lng = position.coords.longitude;
 
-        try {
-            const [currentWeatherData, hourlyForecastData] = await Promise.all([
-                fetchCurrentWeather(lat, lng),
-                fetchHourlyForecast(lat, lng)
-            ]);
-            
-            document.startViewTransition(() => {
-                displayCurrentWeather(currentWeatherData);
-                displayHourlyForecast(hourlyForecastData);
-            });
-        }
-        catch (error) {
-            console.error('Error fetching weather data:', error);
-        }
+//Function to fetch and display weather data
+async function fetchAndDisplayWeather(city) {
+    const { lat, lng, locationName } = await fetchCityCoordinates(city);
+    const [currentWeatherData, hourlyForecastData] = await Promise.all([
+        fetchCurrentWeather(lat, lng),
+        fetchHourlyForecast(lat, lng)
+    ]);
+
+    document.startViewTransition(() => {
+        displayCurrentWeather(currentWeatherData, locationName);
+        displayHourlyForecast(hourlyForecastData);
     });
+}
+
+//Loader Animations Functions
+function showLoader() {
+    document.querySelector('.weather-box').style.visibility = 'hidden';
+    document.querySelector('.loader').style.display = 'flex';
+}
+function hideLoader() {
+    document.querySelector('.weather-box').style.visibility = 'visible';
+    document.querySelector('.loader').style.display = 'none';
+}
+
+//Main
+document.addEventListener('DOMContentLoaded', async () => {
+    //Fetch default city's weather data on load
+    try {
+        await fetchAndDisplayWeather('New York');
+    } catch (error) {
+        console.warn(error);
+    }
+    finally {
+        hideLoader();
+    }
 
     //Add event listener to search button
     const searchBtn = document.querySelector('.search-btn');
     searchBtn.addEventListener('click', async (e) => {
         const cityInputBox = document.querySelector('#city-input');
         const city = cityInputBox.value;
+        showLoader();
 
         try {
-            const { lat, lng } = await fetchCityCoordinates(city);
-
-            const [currentWeatherData, hourlyForecastData] = await Promise.all([
-                fetchCurrentWeather(lat, lng),
-                fetchHourlyForecast(lat, lng)
-            ]);
-
-            document.startViewTransition(() => {
-                displayCurrentWeather(currentWeatherData);
-                displayHourlyForecast(hourlyForecastData);
-            });
+            await fetchAndDisplayWeather(city);
+            cityInputBox.value = '';
         }
         catch (error) {
             cityInputBox.value = '';
+        }
+        finally {
+            hideLoader();
         }
     });
 });
