@@ -2,8 +2,6 @@
 
 This is a responsive weather application built using vanilla JavaScript, HTML, and CSS. It fetches current weather conditions and a multi-hour forecast by utilizing two different Google APIs for coordinate lookups and weather data. The app is designed for speed and reliability using modern asynchronous JavaScript techniques.
 
----
-
 ## 🖥️ Displayed Data & UI
 
 The application features a clean, two-section layout that prioritizes scannability and key weather metrics.
@@ -25,3 +23,35 @@ This section presents a short-term forecast, typically covering the next 4 hours
 * **Time:** The forecast time, converted to the searched city's local time zone.
 * **Temperature:** The predicted temperature for that hour.
 * **Icon:** The predicted weather icon for that hour.
+
+## ⚙️ Setup and Installation
+
+### 1. Clone the Repository
+
+```bash
+git clone git@github.com:hhrsnm/weather-app.git
+cd weather-app
+npm install
+```
+
+### 2. Obtain API Key
+
+This application requires a Google API key with access to the Geocoding API and Weather API.
+
+### 3. Configure Environment Variables
+
+Create a file named `.env` in the root directory of the project and add your API key:
+
+```
+VITE_API_KEY="YOUR_GOOGLE_API_KEY_HERE"
+```
+
+### 4. Run Locally
+
+```bash
+npm run dev
+```
+
+## ⚖️ License
+
+Have a look at the [license file](./LICENSE) for details
